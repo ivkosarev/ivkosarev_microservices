@@ -1,7 +1,9 @@
-FROM python:3.6.0-alpine
+FROM ubuntu:18.04
 WORKDIR /app
 ADD . /app
-RUN pip install -r /app/requirements.txt
+RUN apt update -y \
+ && apt install -y python3-pip
+RUN pip3 install -r requirements.txt
 ENV POST_DATABASE_HOST post_db
 ENV POST_DATABASE posts
-CMD ["python3", "post_app.py"]
+ENTRYPOINT ["python3", "post_app.py"]
